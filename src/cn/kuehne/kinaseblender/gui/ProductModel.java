@@ -62,7 +62,7 @@ public class ProductModel extends AbstractBasicTableModel {
 		data[2][0] = "Amount";
 		data[3][0] = "Sources";
 		for (int si = 0; si < maxSources; si++) {
-			data[si + 4][0] = "Source_" + si;
+			data[si + 4][0] = "Source_" + (si+1);
 		}
 		for (int pi = 0; pi < products; pi++) {
 			final Product product = compiled.getProduct(pi);
