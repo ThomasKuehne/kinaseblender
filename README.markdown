@@ -8,7 +8,7 @@ Thomas Kuehne <thomas@kuehne.cn>
 
 Documentation
 -------------
-[https://github.com/ThomasKuehne/kinaseblender/raw/master/doc/kinaseblender.html](https://github.com/ThomasKuehne/kinaseblender/raw/master/doc/kinaseblender.html)
+[http://thomaskuehne.github.com/kinaseblender/kinaseblender.html](http://thomaskuehne.github.com/kinaseblender/kinaseblender.html)
 
 Download
 -------------
