@@ -36,7 +36,7 @@ public class ProductModel extends AbstractBasicTableModel {
 	private final Object[][] data;
 
 	public ProductModel(final CompiledCloud compiled) {
-		super(" Product");
+		super(" Products");
 
 		final int products = compiled.getProductCount();
 		int maxSources = 0;
