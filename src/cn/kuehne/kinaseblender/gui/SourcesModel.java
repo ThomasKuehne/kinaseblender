@@ -61,7 +61,7 @@ public class SourcesModel extends AbstractBasicTableModel {
 		data[2][0] = "Amount";
 		data[3][0] = "Products";
 		for (int si = 0; si < maxProducts; si++) {
-			data[si + 4][0] = "Product_" + si;
+			data[si + 4][0] = "Product_" + (si+1);
 		}
 		for (int si = 0; si < sources; si++) {
 			data[0][si + 1] = (si + 1);
