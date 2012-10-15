@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE>Kinaseblender</TITLE>
+</HEAD>
+<BODY LANG="en-GB" DIR="LTR">
+<H1><a href="https://github.com/ThomasKuehne/kinaseblender">Kinaseblender</a></H1>
+<H2 >Author</H2>
+<P>Thoms K&uuml;hne <A HREF="mailto:thomas@kuehne.cn">&lt;thomas@kuehne.cn&gt;</A></P>
+<H2 >Abstract</H2>
+<P>Kinaseblender uses a heuristic search algorithm to find those
+combination of producers that produce the the maximum number of
+different products. For example, when used for experiment planing
+producers might be cell lines and products might be proteins.</P>
+<H2 >Running Kinaseblender</H2>
+<OL>
+	<LI><P>Download the current version
+	<A HREF="http://github.com/ThomasKuehne/kinaseblender/raw/master/kinaseblender-current.jar">http://github.com/ThomasKuehne/kinaseblender/raw/master/kinaseblender-current.jar</A></P>
+	<LI><P>Ensure that <A HREF="http://java.com/">Java</A> &gt;= 6 is
+	installed.</P>
+	<LI><P>Depending on your OS installation double click on
+	kinaseblender-current.jar or execute <CODE >java -jar
+	kinaseblender-current.jar </CODE>in a shell.</P>
+</OL>
+<H2 ><A NAME="gui"></A>GUI elements</H2>
+<P><IMG SRC="images/01_inital.png"></P>
+<UL>
+	<LI><P>(<FONT COLOR="#c5000b">red</FONT>)
+	Read from Clipboard: Tries to interpret the current clipboard's
+	content. MS Excel, OpenOffice.org and plain text files with TAB
+	separators are known to work. For the data format see <A HREF="#data">Data</A>.</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) Selector: Choose any of
+	the available views.</P>
+	<LI><P>(<FONT COLOR="#ffd320">yellow</FONT>) About: Display the
+	author's contact info and the license.</P>
+	<LI><P>(<FONT COLOR="#800080">magenta</FONT>) Write to Clipboard:
+	Copy the current view to the system clipboard.</P>
+</UL>
+<P>All cells with blue text can be clicked on for further details.</P>
+<H2 ><A NAME="data"></A>Data</H2>
+<P>The following chapters use <A HREF="sample.txt">sample.txt</A> /
+<A HREF="sample.ods">sample.ods</A>(OpenOffice.org) / <A HREF="sample.xls">sample.xls</A>(MS
+Office).</P>
+
+<TABLE border="1">
+	<TR>
+		<TD> &nbsp;</TD>
+		<TD><FONT COLOR="#579d1c">Farm</FONT></TD>
+		<TD><FONT COLOR="#579d1c">Garden</FONT></TD>
+		<TD><FONT COLOR="#579d1c">Pond</FONT></TD>
+		<TD><FONT COLOR="#579d1c">Steppe</FONT></TD>
+		<TD><FONT COLOR="#579d1c">Woods</FONT></TD>
+	</TR>
+	<TR>
+		<TD><FONT COLOR="#7e0021">Grass</FONT></TD>
+		<TD><FONT COLOR="#004586">1</FONT></TD>
+		<TD><FONT COLOR="#004586">5</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+	</TR>
+	<TR>
+		<TD><FONT COLOR="#7e0021">Lavender</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">12</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+	</TR>
+	<TR>
+		<TD><FONT COLOR="#7e0021">Mistletoe</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">8</FONT></TD>
+	</TR>
+	<TR>
+		<TD><FONT COLOR="#7e0021">Peyote</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">1</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">2</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+	</TR>
+	<TR>
+		<TD><FONT COLOR="#7e0021">Water Lily</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">3</FONT></TD>
+		<TD><FONT COLOR="#004586">20</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+	</TR>
+	<TR>
+		<TD><FONT COLOR="#7e0021">Wheat</FONT></TD>
+		<TD><FONT COLOR="#004586">40</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+	</TR>
+	<TR>
+		<TD><FONT COLOR="#7e0021">White sage</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">8</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+		<TD><FONT COLOR="#004586">0</FONT></TD>
+	</TR>
+</TABLE>
+<P>The input data has to be formatted with sources(<FONT COLOR="#579d1c">green</FONT>),
+products(<FONT COLOR="#7e0021">red</FONT>) and the amount(<FONT COLOR="#004586">blue</FONT>).
+Amount cells with no content, non-positive numbers or non-numeric
+content are ignored. If the same source appears in different columns
+their data is merged(logical OR). The same is true for product rows.</P>
+
+<H2 >Data View</H2>
+<P>Open any of: <A HREF="sample.txt">sample.txt</A>, <A HREF="sample.ods">sample.ods</A>,
+<A HREF="sample.xls">sample.xls</A>. Select the content, copy it to
+the clipboard and press &ldquo;Read from Clipboard&rdquo; in
+Kinaseblender:</P>
+<P><IMG SRC="images/02_data.png"></P>
+<P>This view displays Kinaseblender's raw interpretation of the
+imported data.</P>
+<UL>
+	<LI><P>(<FONT COLOR="#c5000b">red</FONT>) product names</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) source names</P>
+	<LI><P>(<FONT COLOR="#ffd320">yellow</FONT>) amount</P>
+</UL>
+<H2 >Source View</H2>
+<P>Open the selector and choose &ldquo;Source&rdquo;:</P>
+<P><IMG SRC="images/03_source.png"></P>
+<P>This view provides a short overview over the sources.</P>
+<UL>
+	<LI><P>(<FONT COLOR="#7e0021">red</FONT>) source name</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) total amount of products
+	produces by this source</P>
+	<LI><P>(<FONT COLOR="#ffd320">yellow</FONT>) number of different
+	products produces by this source</P>
+	<LI><P>(<FONT COLOR="#4b1f6f">magenta</FONT>) product names</P>
+</UL>
+<H2 >Products View</H2>
+<P>Open the selector and choose &ldquo;Products&rdquo;:</P>
+<P><IMG SRC="images/04_product.png"></P>
+<P>This view displays provides a short overview over the products.</P>
+<UL>
+	<LI><P>(<FONT COLOR="#7e0021">red</FONT>) product name</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) total amount of product
+	produces by all sources</P>
+	<LI><P>(<FONT COLOR="#ffd320">yellow</FONT>) number of different
+	sources producing this product</P>
+	<LI><P>(<FONT COLOR="#4b1f6f">magenta</FONT>) source names</P>
+</UL>
+<H2 >Required Sources View</H2>
+<P>Open the selector and choose &ldquo;Required Sources&rdquo;:</P>
+<P><IMG SRC="images/05_required_sources.png"></P>
+<P>This view displays provides a short overview over how many sources
+are required to produce a certain number of different products.</P>
+<UL>
+	<LI><P>(<FONT COLOR="#7e0021">red</FONT>) number of sources used for
+	the combination(s)</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) number of different
+	products produced by this combination</P>
+	<LI><P>(<FONT COLOR="#ffd320">yellow</FONT>) number of different
+	combination having the same number of sources and products 
+	</P>
+	<LI><P>(<FONT COLOR="#4b1f6f">magenta</FONT>) There are 2(<FONT COLOR="#ffd320">yellow</FONT>)
+	different source combinations  with 2(<FONT COLOR="#c5000b">red</FONT>)
+	sources each producing 6(<FONT COLOR="#579d1c">green</FONT>)
+	different products.</P>
+</UL>
+<H2 >Unique Count View</H2>
+<P>Open the selector and choose &ldquo;Unique Count&rdquo;:</P>
+<P><IMG SRC="images/06_unique_count.png"></P>
+<P>This view displays provides a detailed overview over the best
+combinations.</P>
+<UL>
+	<LI><P>(<FONT COLOR="#7e0021">red</FONT>) number of sources used for
+	the combination</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) number of different
+	products produced by this combination</P>
+	<LI><P>(<FONT COLOR="#ffd320">yellow</FONT>) number of products
+	produced by only one source in this combination</P>
+	<LI><P>(<FONT COLOR="#4b1f6f">magenta</FONT>) number of products
+	produced by more than one source in this combination</P>
+	<LI><P>(<FONT COLOR="#000080">blue</FONT>) number unique products
+	produced by the various sources</P>
+	<LI><P>(<FONT COLOR="#008080">turquoise</FONT>) The best combination
+	with 3(<FONT COLOR="#7e0021">red</FONT>) sources produce 7(<FONT COLOR="#579d1c">green</FONT>)
+	different products. 6 (<FONT COLOR="#ffd320">yellow</FONT>) of the
+	products are produced by only one source. 1 (<FONT COLOR="#4b1f6f">magenta</FONT>)
+	product is produced by at least two sources. Garden, Wood and Farm
+	contribute 4, 1 and 1 (<FONT COLOR="#000080">blue</FONT>) unique
+	products to the combination.</P>
+</UL>
+<H2 >Source View</H2>
+<P>Open the selector and choose &ldquo;Unique Count&rdquo;. Click on
+the last column header &ldquo;Farm&rdquo;:</P>
+<P><IMG SRC="images/07_source_farm.png"></P>
+<P>This view details a single source.</P>
+<UL>
+	<LI><P>(<FONT COLOR="#7e0021">red</FONT>) name of the product</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) amount produced by this
+	source</P>
+</UL>
+<H2 >Product View</H2>
+<P>Open the selector, choose &ldquo;Products&rdquo; and click on
+&ldquo;Grass&rdquo;:</P>
+<P><IMG SRC="images/10_product_grass.png"></P>
+<P>This view details a single product.</P>
+<UL>
+	<LI><P>(<FONT COLOR="#7e0021">red</FONT>) name of the source</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) amount produced by this
+	source</P>
+</UL>
+<H2 >Combination View</H2>
+<P>Open the selector and choose &ldquo;Unique Count&rdquo;. Click on
+the second 6 in the &ldquo;Products&rdquo; column:</P>
+<P><IMG SRC="images/08_combination.png"></P>
+<P>This view details a single combination.</P>
+<UL>
+	<LI><P>(<FONT COLOR="#7e0021">red</FONT>) product name</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) total amount produced</P>
+	<LI><P>(<FONT COLOR="#ffd320">yellow</FONT>) number of sources
+	producing this product</P>
+	<LI><P>(<FONT COLOR="#4b1f6f">magenta</FONT>) number of the sources</P>
+	<LI><P>(<FONT COLOR="#000080">blue</FONT>) number unique products
+	produced by the various sources</P>
+	<LI><P>(<FONT COLOR="#008080">turquoise</FONT>) Click on &ldquo;What
+	if &gt;&gt;&rdquo; to use this combination as a basis for a &ldquo;What
+	If&rdquo; view.</P>
+</UL>
+<H2 >What If View</H2>
+<P>Open the selector and choose &ldquo;What if&rdquo;:</P>
+<P><IMG SRC="images/09_what_if.png"></P>
+<P>This view allows the user to create custom source combinations.</P>
+<UL>
+	<LI><P>(<FONT COLOR="#7e0021">red</FONT>) source name</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) checked sources will be
+	included in analysis</P>
+	<LI><P>(<FONT COLOR="#ffd320">yellow</FONT>) click on &ldquo;Show
+	&gt;&gt;&rdquo; do display a Combination View for the selected
+	combination.</P>
+</UL>
+<H2 >Next Best View</H2>
+<P>Open the selector and choose &ldquo;Next Best: 1 Sources&rdquo;:</P>
+<P><IMG SRC="images/11_next_best.png"></P>
+<P>This view provides sub-optimal intermediate results from the
+heuristic search algorithm.</P>
+<UL>
+	<LI><P>(<FONT COLOR="#7e0021">red</FONT>) number of sources used for
+	the combination</P>
+	<LI><P>(<FONT COLOR="#579d1c">green</FONT>) number of different
+	products produced by this combination</P>
+	<LI><P>(<FONT COLOR="#ffd320">yellow</FONT>) number of products
+	produced by only one source in this combination</P>
+	<LI><P>(<FONT COLOR="#4b1f6f">magenta</FONT>) number of products
+	produced by more than one source in this combination</P>
+	<LI><P>(<FONT COLOR="#008080">turquoise</FONT>) number unique
+	products produced by the various sources</P>
+</UL>
+</BODY>
+</HTML>
