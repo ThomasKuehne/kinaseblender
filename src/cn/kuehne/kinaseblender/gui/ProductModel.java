@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2011, 2012 Thomas Kühne <thomas@xn--khne-0ra.name>
+ * Copyright (c) 2010, 2011, 2012 Thomas Kühne <thomas@kuehne.cn>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
