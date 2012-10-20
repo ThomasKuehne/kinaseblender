@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2011, 2012 Thomas Kühne <thomas@kuehne.cn>
+ * Copyright (c) 2010, 2011, 2012 Thomas Kuehne <thomas@kuehne.cn>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -400,12 +400,12 @@ public class AppFrame extends JFrame implements AppInterface {
 		content.add(top, BorderLayout.NORTH);
 		top.setLayout(new BorderLayout());
 
-		final JButton importButton = new JButton("» Read from Clipboard");
+		final JButton importButton = new JButton("\u00BB Read from Clipboard");
 		importButton.addActionListener(new Importer());
 
 		top.add(importButton, BorderLayout.WEST);
 
-		exportButton = new JButton("Write to Clipboard »");
+		exportButton = new JButton("Write to Clipboard \u00BB");
 		exportButton.setEnabled(false);
 		exportButton.addActionListener(new ExportListener());
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, 2011 Thomas Kühne <thomas@kuehne.cn>
+ * Copyright (c) 2010, 2011 Thomas Kuehne <thomas@kuehne.cn>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -43,7 +43,7 @@ final class About implements ActionListener {
 						button,
 						"<html><head><title>About Kinaseblender</title></head><body><center><big><b>Kinaseblender</b></big></center><br>"
 								+ "Minimize number of sources against number of products.<br><br>"
-								+ "Copyright (c) 2010, 2011, 2012 Thomas Kühne &#60;thomas@kuehne.cn&#62;<br>"
+								+ "Copyright (c) 2010, 2011, 2012 Thomas Kuehne &#60;thomas@kuehne.cn&#62;<br>"
 								+ "<br>"
 								+ "<font size='-1'>Permission is hereby granted, free of charge, to any person obtaining<br>"
 								+ "a copy of this software and associated documentation files (the<br>"
