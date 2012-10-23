@@ -28,6 +28,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+/**
+ * Display contact and copyright notice. 
+ */
 final class About implements ActionListener {
 	private final JButton button;
 

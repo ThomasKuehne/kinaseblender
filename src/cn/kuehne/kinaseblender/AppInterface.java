@@ -24,28 +24,57 @@ package cn.kuehne.kinaseblender;
 
 import java.awt.event.ItemListener;
 
-import javax.swing.ComboBoxModel;
-
+/**
+ * Implementation independent GUI controlls
+ */
 public interface AppInterface {
+	/**
+	 * add an item to the tab selector 
+	 */
 	void addItem(Object item);
 
+	/**
+	 * add an ItemListener to the tab selector 
+	 */
 	void addItemListener(ItemListener l);
 
+	/**
+	 * enable/disable export button 
+	 */
 	void enableExport(boolean enable);
 
-	ComboBoxModel getModel();
-
+	/**
+	 * Execute a Runnable in the event thread 
+	 */
 	void invokeInEventDispatchThread(Runnable runnable);
 
+	/**
+	 * remove last progress report
+	 */
 	void progressPop();
 
+	/**
+	 * add a new progress report
+	 */
 	void progressPush(String message);
 
+	/**
+	 * replace current progress report
+	 */
 	void progressSwitch(String message);
 
+	/**
+	 * remove all items from the tab selector
+	 */
 	void removeAllItems();
 
+	/**
+	 * select an item from the tab selector
+	 */
 	void setSelectedItem(Object anObject);
 
+	/**
+	 * change window title
+	 */
 	void setTitle(String title);
 }

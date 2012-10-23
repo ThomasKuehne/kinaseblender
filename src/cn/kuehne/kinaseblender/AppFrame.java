@@ -60,7 +60,13 @@ import cn.kuehne.kinaseblender.gui.ExportableTableModel;
 import cn.kuehne.kinaseblender.gui.GuiCloud;
 import cn.kuehne.kinaseblender.gui.UnhandledException;
 
+/**
+ * GUI Central
+ */
 public class AppFrame extends JFrame implements AppInterface {
+	/**
+	 * Add an entry to the tab selector
+	 */
 	class AddItem implements Runnable {
 		final Object item;
 
@@ -70,11 +76,11 @@ public class AppFrame extends JFrame implements AppInterface {
 
 		@Override
 		public void run() {
-			final ComboBoxModel model = combo.getModel();
+			final ComboBoxModel<Object> model = combo.getModel();
 			if (model instanceof DefaultComboBoxModel) {
 				final String key = item.toString();
 
-				final MutableComboBoxModel mutableModel = (MutableComboBoxModel) model;
+				final MutableComboBoxModel<Object> mutableModel = (MutableComboBoxModel<Object>) model;
 				for (int i = 0; i < mutableModel.getSize(); i++) {
 					final Object value = mutableModel.getElementAt(i);
 					final String valueKey = value.toString();
@@ -90,6 +96,9 @@ public class AppFrame extends JFrame implements AppInterface {
 
 	}
 
+	/**
+	 * Enable or disable the "Export" button
+	 */
 	class EnableExport implements Runnable {
 		final boolean enable;
 
@@ -104,6 +113,9 @@ public class AppFrame extends JFrame implements AppInterface {
 
 	}
 
+	/**
+	 * Export current table to clip board
+	 */
 	class ExportListener implements ActionListener, Runnable {
 		@Override
 		public void actionPerformed(final ActionEvent event) {
@@ -146,6 +158,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		}
 	}
 
+	/**
+	 * Use one or more local files as data source
+	 */
 	class FileImporter implements Runnable {
 
 		private final String[] fileNames;
@@ -188,6 +203,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		}
 	}
 	
+	/**
+	 * Use clip board as data source
+	 */
 	class Importer implements ActionListener, Runnable {
 		@Override
 		public void actionPerformed(final ActionEvent event) {
@@ -225,6 +243,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		}
 	}
 
+	/**
+	 * Remove the latest progress report
+	 */
 	class ProgressPop implements Runnable {
 		@Override
 		public void run() {
@@ -249,6 +270,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		}
 	}
 
+	/**
+	 * Add a new progress report
+	 */
 	class ProgressPush implements Runnable {
 		final String message;
 
@@ -275,6 +299,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		}
 	}
 
+	/**
+	 * Replace latest progress report
+	 */
 	class ProgressSwitch implements Runnable {
 		final String message;
 
@@ -294,6 +321,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		}
 	}
 
+	/**
+	 * Remove all entries from tab selector
+	 */
 	class RemoveAllItems implements Runnable {
 		@Override
 		public void run() {
@@ -303,6 +333,9 @@ public class AppFrame extends JFrame implements AppInterface {
 
 	}
 
+	/**
+	 * Helper: selecting a tab
+	 */
 	class SetSelectedItem implements Runnable {
 		final Object item;
 
@@ -317,6 +350,9 @@ public class AppFrame extends JFrame implements AppInterface {
 
 	}
 
+	/**
+	 * create initial GUI 
+	 */
 	static class Starter implements Runnable {
 		private String[] args;
 		
@@ -334,6 +370,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		}
 	}
 
+	/**
+	 * Helper: store windows preferences on exit
+	 */
 	class StorePreferenceHandler extends WindowAdapter {
 		@Override
 		public void windowClosing(final WindowEvent evt) {
@@ -343,18 +382,36 @@ public class AppFrame extends JFrame implements AppInterface {
 
 	private final static boolean DEBUG_PROGRESS = false;
 
+	/**
+	 * Default window height
+	 */
 	private final static int DEFAULT_HEIGHT = 500;
 
+	/**
+	 * Default window origin x
+	 */
 	private final static int DEFAULT_ORIGIN_X = 20;
 
+	/**
+	 * Default window origin y
+	 */
 	private final static int DEFAULT_ORIGIN_Y = 20;
 
+	/**
+	 * Default window width 
+	 */
 	private final static int DEFAULT_WIDTH = 600;
 
+	/**
+	 * window icon
+	 */
 	private static ImageIcon icon;
 
 	private final static long serialVersionUID = 1L;
 
+	/**
+	 * get window icon, load it if necessary
+	 */
 	public static ImageIcon getIcon() {
 		synchronized (AppFrame.class) {
 			if (icon == null) {
@@ -365,6 +422,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		return icon;
 	}
 
+	/**
+	 * @param args source file(s), if any 
+	 */
 	public static void main(final String[] args) {
 
 		final UnhandledException exceptionHandler = UnhandledException
@@ -374,11 +434,11 @@ public class AppFrame extends JFrame implements AppInterface {
 		SwingUtilities.invokeLater(new Starter(args));
 	}
 
-	private final JComboBox combo;
+	private final JComboBox<Object> combo;
 
 	private final JButton exportButton;
 
-	final GuiCloud guiCloud;
+	private final GuiCloud guiCloud;
 
 	private final JProgressBar progressBar;
 
@@ -418,9 +478,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		ctr.add(exportButton, BorderLayout.CENTER);
 		top.add(ctr, BorderLayout.EAST);
 
-		combo = new JComboBox();
+		combo = new JComboBox<Object>();
 		combo.setEnabled(false);
-		combo.setModel(new DefaultComboBoxModel());
+		combo.setModel(new DefaultComboBoxModel<Object>());
 		top.add(combo, BorderLayout.CENTER);
 
 		guiCloud = new GuiCloud(this);
@@ -440,26 +500,33 @@ public class AppFrame extends JFrame implements AppInterface {
 		setVisible(true);
 	}
 
+	/**
+	 * add an item to the tab selector 
+	 */
 	@Override
 	public void addItem(final Object item) {
 		invokeInEventDispatchThread(new AddItem(item));
 	}
 
+	/**
+	 * add an ItemListener to the tab selector 
+	 */
 	@Override
 	public void addItemListener(ItemListener l) {
 		combo.addItemListener(l);
 	}
 
+	/**
+	 * enable/disable export button 
+	 */
 	@Override
 	public void enableExport(final boolean enable) {
 		invokeInEventDispatchThread(new EnableExport(enable));
 	}
 
-	@Override
-	public ComboBoxModel getModel() {
-		return combo.getModel();
-	}
-
+	/**
+	 * Execute a Runnable in the event thread 
+	 */
 	@Override
 	public void invokeInEventDispatchThread(Runnable runnable) {
 		if (SwingUtilities.isEventDispatchThread()) {
@@ -469,6 +536,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		}
 	}
 
+	/**
+	 * load window preferences, so that the window opens at it's last position
+	 */
 	private void loadPreferences() {
 		int width = DEFAULT_WIDTH;
 		int height = DEFAULT_HEIGHT;
@@ -493,32 +563,50 @@ public class AppFrame extends JFrame implements AppInterface {
 		setLocation(originX, originY);
 	}
 
+	/**
+	 * remove last progress report
+	 */
 	@Override
 	public void progressPop() {
 		invokeInEventDispatchThread(new ProgressPop());
 	}
 
+	/**
+	 * add a new progress report
+	 */
 	@Override
 	public void progressPush(final String message) {
 		invokeInEventDispatchThread(new ProgressPush(message));
 	}
 
+	/**
+	 * replace current progress report
+	 */
 	@Override
 	public void progressSwitch(String message) {
 		invokeInEventDispatchThread(new ProgressSwitch(message));
 	}
 
+	/**
+	 * remove all items from the tab selector
+	 */
 	@Override
 	public void removeAllItems() {
 		invokeInEventDispatchThread(new RemoveAllItems());
 	}
 
+	/**
+	 * select an item from the tab selector
+	 */
 	@Override
 	public void setSelectedItem(final Object item) {
 		invokeInEventDispatchThread(new SetSelectedItem(item));
 	}
 
-	void storePreferences() {
+	/**
+	 * store window preferences, so that the window can be opened at it's last position
+	 */
+	private void storePreferences() {
 		final Preferences prefs = Preferences.userNodeForPackage(getClass());
 		final Preferences framePrefs = prefs.node("frame");
 		framePrefs.putInt("width", getWidth());
