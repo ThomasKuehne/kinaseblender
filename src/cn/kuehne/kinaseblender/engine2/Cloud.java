@@ -34,6 +34,9 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+/*
+ * slow intermediate storage for Source-Product data
+ */
 public class Cloud {
 	private static final Pattern TAB = Pattern.compile("\t");
 
@@ -51,7 +54,6 @@ public class Cloud {
 
 	private final NamedComparator comparator;
 
-	private Creator helper;
 	private final NavigableMap<Source, TreeMap<Product, Float>> map;
 
 	private final NavigableSet<Product> products;
@@ -65,7 +67,10 @@ public class Cloud {
 		map = new TreeMap<Source, TreeMap<Product, Float>>(comparator);
 	}
 
-	public void addProduct(final Product product) {
+	/**
+	 * add product, if it isn't already part of this Cloud
+	 */
+	public boolean addProduct(final Product product) {
 		if (product == null) {
 			throw new IllegalArgumentException("product is null");
 		}
@@ -73,10 +78,13 @@ public class Cloud {
 		if (name == null) {
 			throw new IllegalArgumentException("products's name is null");
 		}
-		products.add(product);
+		return products.add(product);
 	}
 
-	public void addSource(final Source source) {
+	/**
+	 * add source, if it isn't already part of this Cloud
+	 */
+	public boolean addSource(final Source source) {
 		if (source == null) {
 			throw new IllegalArgumentException("source is null");
 		}
@@ -85,9 +93,12 @@ public class Cloud {
 			throw new IllegalArgumentException("source's name is null");
 		}
 
-		sources.add(source);
+		return sources.add(source);
 	}
 
+	/**
+	 * transform into an optimized, read-only CompiledCloud 
+	 */
 	public CompiledCloud compile() {
 		final Source[] sBack = getSources();
 		final Product[] pBack = getProducts();
@@ -119,93 +130,72 @@ public class Cloud {
 		return new Source(name);
 	}
 
-	public Creator getCreator() {
-		return helper;
-	}
-
-	public Product getOrCreateProduct(final String name) {
-		Product product = getProduct(name);
-		if (product != null) {
-			return product;
-		}
-
-		final Creator creator = getCreator();
-		if (creator != null) {
-			product = creator.createProduct(name);
-			addProduct(product);
-			return product;
-		}
-		throw new IllegalArgumentException("creator is null");
-	}
-
-	public Source getOrCreateSource(final String name) {
-		Source source = getSource(name);
-		if (source != null) {
-			return source;
-		}
-
-		final Creator creator = getCreator();
-		if (creator != null) {
-			source = creator.createSource(name);
-			addSource(source);
-			return source;
-		}
-		throw new IllegalArgumentException("creator is null");
-	}
-
+	/**
+	 * map product name to product
+	 */
 	public Product getProduct(final String name) {
 		if (name == null) {
 			throw new IllegalArgumentException("products's name is null");
 		}
 		for (Product p : products) {
 			if (name.equals(p.getName())) {
-				return p; // TODO lineare suche...
+				return p;
 			}
 		}
 		return null;
 	}
 
+	/**
+	 * total number of products
+	 */
 	public int getProductCount() {
 		return products.size();
 	}
 
+	/**
+	 * new array containing all products
+	 */
 	public Product[] getProducts() {
 		return products.toArray(new Product[products.size()]);
 	}
 
+	/**
+	 * map source name to source
+	 */
 	public Source getSource(final String name) {
 		if (name == null) {
 			throw new IllegalArgumentException("source's name is null");
 		}
 		for (Source s : sources) {
 			if (name.equals(s.getName())) {
-				return s; // TODO lineare suche...
+				return s;
 			}
 		}
 		return null;
 	}
 
+	/**
+	 * total number of sources
+	 */
 	public int getSourceCount() {
 		return sources.size();
 	}
 
+	/**
+	 * new array containing all sources
+	 */
 	public Source[] getSources() {
 		final Source[] back = new Source[sources.size()];
 		return sources.toArray(back);
 	}
 
+	/**
+	 * set production value for the given source
+	 */
 	public void produces(final Source source, final Product product,
 			final float value) {
 		addSource(source);
 		addProduct(product);
-
-		producesImpl(source, product, value);
-	}
-
-	public void produces(final String sourceName, final String productName,
-			final float value) {
-		final Source source = getOrCreateSource(sourceName);
-		final Product product = getOrCreateProduct(productName);
 
 		producesImpl(source, product, value);
 	}
@@ -225,6 +215,9 @@ public class Cloud {
 		set.put(product, value);
 	}
 
+	/**
+	 * parse, filter and add tab separated data
+	 */
 	public void readAll(final Reader input, final double minValue)
 			throws IOException {
 		final LineNumberReader reader = new LineNumberReader(input);
@@ -261,9 +254,5 @@ public class Cloud {
 				}
 			}
 		}
-	}
-
-	public void setCreator(final Creator creator) {
-		helper = creator;
 	}
 }

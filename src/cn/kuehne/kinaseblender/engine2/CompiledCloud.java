@@ -30,7 +30,13 @@ import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
+/*
+ * fast processing storage for Source-Product data
+ */
 public class CompiledCloud {
+	/**
+	 * dynamic, intermediate combination used to find optimum combinations
+	 */
 	final class SearchComb implements Comparable<SearchComb>, Scored {
 		final boolean[] prods;
 		int score;
@@ -68,26 +74,18 @@ public class CompiledCloud {
 			return false;
 		}
 
-		@Override
-		public boolean equals2(Scored raw) {
-			if (raw == null || !(raw instanceof SearchComb)) {
-				return false;
-			}
-
-			final SearchComb other = (SearchComb) raw;
-			for (int i = 0; i < subs.length; i++) {
-				if (subs[i] ^ other.subs[i]) {
-					return false;
-				}
-			}
-			return true;
-		}
-
+		/**
+		 * number of products
+		 */
 		@Override
 		public int getScore() {
 			return score;
 		}
 
+		/**
+		 * add the given source and it's products
+		 * @return number of total products if new products have been encountered
+		 */
 		protected int set(final int sourceIndex) {
 			boolean changed = false;
 			int count = 0;
@@ -105,7 +103,18 @@ public class CompiledCloud {
 			return (changed ? count : 0);
 		}
 	}
+	
+	/**
+	 * calculate the maximum number of combinations retained between search rounds
+	 */
+	public int calculateBufferCapacity(){
+		final int s = getSourceCount();
+		return (int) (s * Math.log(s + Math.E));
+	}
 
+	/**
+	 * store current search state
+	 */
 	public class SearchState {
 		private final NavigableSet<SearchComb> best;
 
@@ -116,15 +125,17 @@ public class CompiledCloud {
 
 		public SearchState() {
 			deepth = 0;
-			final int s = getSourceCount();
-			// Heyristic capacity for combination problem
-			final int capacity = (int) (s * Math.log(s + Math.E));
+			
+			final int capacity = calculateBufferCapacity();
 
 			transfer2 = new TransferBuffer<SearchComb>(capacity);
 			best = new TreeSet<SearchComb>();
 			bestScore = 0;
 		}
-
+		
+		/**
+		 * optimum and near-optimum combinations
+		 */
 		public Combination[] closeCombinations() {
 			Scored[] scored = transfer2.copy();
 			final Combination[] back = new Combination[scored.length];
@@ -136,6 +147,9 @@ public class CompiledCloud {
 			return back;
 		}
 
+		/**
+		 *optimum combinations
+		 */
 		public Combination[] combinations() {
 			final Combination[] back = new Combination[best.size()];
 			int backIndex = 0;
@@ -145,18 +159,30 @@ public class CompiledCloud {
 			return back;
 		}
 
+		/**
+		 * number of optimum combinations
+		 */
 		public int getBestSize() {
 			return best.size();
 		}
 
+		/**
+		 * number of optimum and near-optimum combinations
+		 */
 		public int getCandidateSize() {
 			return transfer2.size();
 		}
 
+		/**
+		 * number of sources
+		 */
 		public int getDeepth() {
 			return deepth;
 		}
 
+		/**
+		 * find new combinations by adding a single source to old optimum and near-optimum combinations
+		 */
 		public boolean search() {
 			final Scored[] old;
 			if (deepth == 0) {
@@ -172,15 +198,22 @@ public class CompiledCloud {
 			transfer2.setMinScore(bestScore);
 
 			for (final Scored rawTemplate : old) {
+				// pick an old combination
 				final SearchComb template = (SearchComb) rawTemplate;
 				if (template != null) {
+					// find sources not yet contained in the template
 					for (int si = 0; si < sources.length; si++) {
 						if (!template.subs[si]) {
+							// old template does't contain the si source
 							final SearchComb test = new SearchComb(template);
 							final int score = test.set(si);
+							// don't filter by score here: near-optimum solutions could be missed
 							if (transfer2.add(test)) {
+								// test is at least a near-optimum solution
 								if (bestScore <= score) {
+									// test is an optimum solution
 									if (bestScore < score) {
+										// test is THE new optimum solution
 										best.clear();
 										bestScore = score;
 									}
@@ -234,11 +267,14 @@ public class CompiledCloud {
 						+ " instead of " + products.length + " for source ("
 						+ sourceIndex + ") " + sources[sourceIndex]);
 			}
-		} // TODO check v
+		}
 		data = produces;
 		valueData = amounts;
 	}
 
+	/**
+	 * print debug representation of this cloud
+	 */
 	public void debug(final Writer writer) throws IOException {
 		writer.append("product");
 		for (Source s : sources) {
@@ -257,10 +293,16 @@ public class CompiledCloud {
 		}
 	}
 
+	/**
+	 * map product index to product
+	 */
 	public Product getProduct(final int productIndex) {
 		return products[productIndex];
 	}
 
+	/**
+	 * map product to product index
+	 */
 	public int getProduct(final Product product) {
 		for (int pi = 0; pi < products.length; pi++) {
 			if (0 == NamedComparator.SINGELTON.compare(products[pi], product)) {
@@ -270,10 +312,16 @@ public class CompiledCloud {
 		return -1;
 	}
 
+	/**
+	 * total number of products
+	 */
 	public int getProductCount() {
 		return products.length;
 	}
 
+	/**
+	 * List of products produced by this source
+	 */
 	public List<Product> getProducts(final Source source) {
 		final ArrayList<Product> back = new ArrayList<Product>();
 		final int sourceIndex = getSource(source);
@@ -285,10 +333,16 @@ public class CompiledCloud {
 		return back;
 	}
 
+	/**
+	 * map source index to source
+	 */
 	public Source getSource(final int sourceIndex) {
 		return sources[sourceIndex];
 	}
 
+	/**
+	 * map source to source index
+	 */
 	public int getSource(final Source source) {
 		for (int si = 0; si < sources.length; si++) {
 			if (0 == NamedComparator.SINGELTON.compare(sources[si], source)) {
@@ -298,10 +352,16 @@ public class CompiledCloud {
 		return -1;
 	}
 
+	/**
+	 * total number of sources
+	 */
 	public int getSourceCount() {
 		return sources.length;
 	}
 
+	/**
+	 * all sources producing the given product
+	 */
 	public List<Source> getSources(final int productIndex) {
 		final ArrayList<Source> back = new ArrayList<Source>();
 		for (int si = 0; si < sources.length; si++) {
@@ -312,20 +372,32 @@ public class CompiledCloud {
 		return back;
 	}
 
+	/**
+	 * all sources producing the given product
+	 */
 	public List<Source> getSources(final Product product) {
 		return getSources(getProduct(product));
 	}
 
+	/**
+	 * amount of the given product produced by the given source
+	 */
 	public float getValue(final int sourceIndex, final int productIndex) {
 		return valueData[sourceIndex][productIndex];
 	}
 
+	/**
+	 * amount of the given product produced by the given source
+	 */
 	public float getValue(final Source source, final Product product) {
 		final int productIndex = getProduct(product);
 		final int sourceIndex = getSource(source);
 		return getValue(sourceIndex, productIndex);
 	}
 
+	/**
+	 * initialize a new SearchState
+	 */
 	public SearchState initSearch() {
 		return new SearchState();
 	}
