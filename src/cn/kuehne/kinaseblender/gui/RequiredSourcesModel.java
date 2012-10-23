@@ -27,6 +27,9 @@ import java.util.List;
 
 import cn.kuehne.kinaseblender.engine2.Combination;
 
+/**
+ * table: overview of best combinations
+ */
 public class RequiredSourcesModel extends AbstractBasicTableModel {
 	private static final long serialVersionUID = 1L;
 	private final Object[][] data;

@@ -4,6 +4,9 @@ import java.util.Collections;
 
 import cn.kuehne.kinaseblender.engine2.Combination;
 
+/**
+ * table: overview of optimum and near-optimum solutions with a common source count
+ */
 public class NextBestModel extends CombinationCollectionModel {
 	private static final long serialVersionUID = 1L;
 

@@ -37,6 +37,9 @@ import cn.kuehne.kinaseblender.engine2.Combination;
 import cn.kuehne.kinaseblender.engine2.Product;
 import cn.kuehne.kinaseblender.engine2.Source;
 
+/**
+ * common table renderer
+ */
 public class RenderJTable extends JTable {
 	class ClickListener extends MouseAdapter {
 		private final CellClickListener listener;

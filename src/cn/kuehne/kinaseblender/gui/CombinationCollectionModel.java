@@ -29,6 +29,9 @@ import java.util.List;
 import cn.kuehne.kinaseblender.engine2.Combination;
 import cn.kuehne.kinaseblender.engine2.Source;
 
+/**
+ * table: multiple combinations
+ */
 public class CombinationCollectionModel extends AbstractBasicTableModel {
 	private static final long serialVersionUID = 1L;
 

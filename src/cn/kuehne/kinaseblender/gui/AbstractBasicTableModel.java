@@ -25,6 +25,9 @@ package cn.kuehne.kinaseblender.gui;
 
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * common table base class 
+ */
 public abstract class AbstractBasicTableModel extends AbstractTableModel
 		implements ExportableTableModel {
 	private static final long serialVersionUID = 1L;
@@ -68,9 +71,6 @@ public abstract class AbstractBasicTableModel extends AbstractTableModel
 		return false;
 	}
 
-	public boolean isCloseable() { // NOPMD
-		return false;
-	}
 
 	@Override
 	public boolean isEmphasized(final int row, final int col) {

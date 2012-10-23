@@ -40,6 +40,9 @@ import cn.kuehne.kinaseblender.engine2.CompiledCloud.SearchState;
 import cn.kuehne.kinaseblender.engine2.Product;
 import cn.kuehne.kinaseblender.engine2.Source;
 
+/**
+ * coordinates all table related GUI operations
+ */
 public class GuiCloud {
 	class CombinationToModel implements Runnable {
 		final Combination combi;

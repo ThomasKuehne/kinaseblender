@@ -33,6 +33,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+/**
+ * Display error messages
+ */
 public class UnhandledException implements UncaughtExceptionHandler {
 	private static final class ShowIt implements Runnable {
 		private static final Icon icon = null;

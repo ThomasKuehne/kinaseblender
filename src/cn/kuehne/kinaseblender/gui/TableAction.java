@@ -22,6 +22,9 @@
  */
 package cn.kuehne.kinaseblender.gui;
 
+/**
+ * forward a cell click to the tab selector
+ */
 public abstract class TableAction {
 	private String title;
 

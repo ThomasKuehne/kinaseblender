@@ -31,6 +31,9 @@ import cn.kuehne.kinaseblender.engine2.CompiledCloud;
 import cn.kuehne.kinaseblender.engine2.Product;
 import cn.kuehne.kinaseblender.engine2.Source;
 
+/**
+ * table: details a single combination
+ */
 public class SingleCombinationModel extends AbstractBasicTableModel {
 	private class ToWhatIf extends TableAction {
 		private final Combination comb;
@@ -120,10 +123,5 @@ public class SingleCombinationModel extends AbstractBasicTableModel {
 	@Override
 	public boolean ignoreColumnForExport(final int col) {
 		return col == 0;
-	}
-
-	@Override
-	public boolean isCloseable() {
-		return true;
 	}
 }

@@ -26,6 +26,9 @@ package cn.kuehne.kinaseblender.gui;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
+/**
+ * cell renderer for Combinations
+ */
 public class CombinationRenderer extends DefaultTableCellRenderer {
 	private static final long serialVersionUID = 1L;
 

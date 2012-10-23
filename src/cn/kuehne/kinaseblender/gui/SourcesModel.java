@@ -30,6 +30,9 @@ import cn.kuehne.kinaseblender.engine2.CompiledCloud;
 import cn.kuehne.kinaseblender.engine2.Product;
 import cn.kuehne.kinaseblender.engine2.Source;
 
+/**
+ * table: overview of all sources
+ */
 public class SourcesModel extends AbstractBasicTableModel {
 	private static final long serialVersionUID = 1L;
 	private final Object[][] data;

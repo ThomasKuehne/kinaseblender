@@ -27,6 +27,9 @@ import javax.swing.table.AbstractTableModel;
 
 import cn.kuehne.kinaseblender.engine2.CompiledCloud;
 
+/**
+ * table: content of CompiledCloud
+ */
 public class CloudModel extends AbstractTableModel implements
 		ExportableTableModel {
 	private static final long serialVersionUID = 1L;

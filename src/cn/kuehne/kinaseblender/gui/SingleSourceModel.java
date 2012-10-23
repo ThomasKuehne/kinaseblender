@@ -29,6 +29,9 @@ import cn.kuehne.kinaseblender.engine2.CompiledCloud;
 import cn.kuehne.kinaseblender.engine2.Product;
 import cn.kuehne.kinaseblender.engine2.Source;
 
+/**
+ * table: details a single source
+ */
 public class SingleSourceModel extends AbstractBasicTableModel {
 	private static final long serialVersionUID = 1L;
 
@@ -68,10 +71,5 @@ public class SingleSourceModel extends AbstractBasicTableModel {
 	@Override
 	protected Object[][] getData() {
 		return data; // NOPMD
-	}
-
-	@Override
-	public boolean isCloseable() {
-		return true;
 	}
 }

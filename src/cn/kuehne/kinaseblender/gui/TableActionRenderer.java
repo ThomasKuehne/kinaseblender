@@ -26,6 +26,9 @@ import java.awt.Color;
 
 import javax.swing.table.DefaultTableCellRenderer;
 
+/**
+ * render a cell containing a link
+ */
 public class TableActionRenderer extends DefaultTableCellRenderer {
 	public static final Color DARK_BLUE = new Color(0, 0, 139);
 	private static final long serialVersionUID = 1L;

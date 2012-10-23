@@ -23,6 +23,9 @@
 
 package cn.kuehne.kinaseblender.gui;
 
+/**
+ * handle mouse clicks on a cell
+ */
 public interface CellClickListener {
 	void onClick(int row, int col);
 }

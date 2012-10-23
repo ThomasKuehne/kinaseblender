@@ -24,6 +24,9 @@ package cn.kuehne.kinaseblender.gui;
 
 import javax.swing.table.TableModel;
 
+/**
+ * meta information about a table 
+ */
 public interface ExportableTableModel extends TableModel {
 	boolean ignoreColumnForExport(int col);
 
