@@ -26,6 +26,9 @@ package cn.kuehne.kinaseblender.engine2;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Source combination used by the GUI models
+ */
 public class Combination {
 	private final CompiledCloud cloud;
 	private int[] products;
@@ -52,6 +55,9 @@ public class Combination {
 		this.sources = sources.clone();
 	}
 
+	/**
+	 * if required, fill "products" 
+	 */
 	private void ensureProducts() {
 		if (products == null) {
 			products = new int[cloud.products.length];
@@ -68,6 +74,9 @@ public class Combination {
 		}
 	}
 
+	/**
+	 * total number of products produced 
+	 */
 	public int getProductCount() {
 		ensureProducts();
 		int sum = 0;
@@ -79,6 +88,9 @@ public class Combination {
 		return sum;
 	}
 
+	/**
+	 * new array containing all Products 
+	 */
 	public Product[] getProducts() {
 		if (productsObj == null) {
 			productsObj = new Product[getProductCount()];
@@ -92,6 +104,9 @@ public class Combination {
 		return productsObj.clone();
 	}
 
+	/**
+	 * total number of Sources 
+	 */
 	public int getSourceCount() {
 		int sum = 0;
 		for (int i = sources.length - 1; -1 < i; i--) {
@@ -102,6 +117,9 @@ public class Combination {
 		return sum;
 	}
 
+	/**
+	 * new array containing all Sources 
+	 */
 	public Source[] getSources() {
 		if (sourcesObj == null) {
 			sourcesObj = new Source[getSourceCount()];
@@ -115,6 +133,9 @@ public class Combination {
 		return sourcesObj.clone();
 	}
 
+	/**
+	 * list all sources producing the given product 
+	 */
 	public List<Source> getSources(final Product product) {
 		final ArrayList<Source> back = new ArrayList<Source>();
 		final int productIndex = cloud.getProduct(product);
@@ -129,6 +150,10 @@ public class Combination {
 		return back;
 	}
 
+	/**
+	 * count all Products only produces by the given source
+	 * @return -1 if source isn't part of this combination 
+	 */
 	public int getUniqueProducts(final Source source) {
 		ensureProducts();
 
@@ -149,6 +174,9 @@ public class Combination {
 		return -1;
 	}
 
+	/**
+	 * check if the given product is produced by this combination 
+	 */
 	public boolean produces(final int product) {
 		return 0 < products[product];
 	}
