@@ -23,6 +23,9 @@
 
 package cn.kuehne.kinaseblender.engine2;
 
+/**
+ * Product: data element who's number is to be optimized
+ */
 public class Product extends Named {
 	public Product(final String name) {
 		super(name);

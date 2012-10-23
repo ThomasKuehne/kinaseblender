@@ -25,6 +25,9 @@ package cn.kuehne.kinaseblender.engine2;
 
 import java.beans.ConstructorProperties;
 
+/**
+ * Common base class for Products and Sources
+ */
 public class Named {
 	private final String name;
 

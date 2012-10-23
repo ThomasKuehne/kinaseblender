@@ -26,6 +26,9 @@ package cn.kuehne.kinaseblender.engine2;
 import java.io.Serializable;
 import java.util.Comparator;
 
+/**
+ * Compare Named instances by their name
+ */
 public class NamedComparator implements Comparator<Named>, Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final NamedComparator SINGELTON = new NamedComparator();
