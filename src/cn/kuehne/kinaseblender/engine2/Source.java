@@ -23,6 +23,9 @@
 
 package cn.kuehne.kinaseblender.engine2;
 
+/**
+ * Source: data element that produces Products
+ */
 public class Source extends Named {
 	public Source(final String name) {
 		super(name);
