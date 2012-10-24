@@ -51,7 +51,6 @@ public class GuiCloud {
 			this.combi = combi;
 		}
 
-		@Override
 		public void run() {
 			appInterface.progressPush("create Combination model");
 			SingleCombinationModel model = new SingleCombinationModel(cloud,
@@ -74,7 +73,6 @@ public class GuiCloud {
 			this.model = model;
 		}
 
-		@Override
 		public void run() {
 			if (selListener.redirected) {
 				selListener.redirected = false;
@@ -96,7 +94,6 @@ public class GuiCloud {
 				this.action = action;
 			}
 
-			@Override
 			public void run() {
 				itemStateChanged(action.getTableActionItem());
 			}
@@ -104,7 +101,6 @@ public class GuiCloud {
 
 		boolean redirected = false;
 
-		@Override
 		public void itemStateChanged(final ItemEvent event) {
 			final Object item = event.getItem();
 			itemStateChanged(item);
@@ -161,7 +157,6 @@ public class GuiCloud {
 					this, model));
 		}
 
-		@Override
 		public void onClick(final int row, final int column) {
 			final Object value = table.getValueAt(row, column);
 			itemStateChanged(value);

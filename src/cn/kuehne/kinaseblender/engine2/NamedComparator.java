@@ -33,7 +33,6 @@ public class NamedComparator implements Comparator<Named>, Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final NamedComparator SINGELTON = new NamedComparator();
 
-	@Override
 	public int compare(final Named one, final Named other) {
 		final int result;
 		if (one == null) {

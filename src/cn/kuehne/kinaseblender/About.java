@@ -39,7 +39,6 @@ final class About implements ActionListener {
 		button.addActionListener(this);
 	}
 
-	@Override
 	public void actionPerformed(final ActionEvent e) {
 		JOptionPane
 				.showMessageDialog(

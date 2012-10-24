@@ -42,7 +42,6 @@ public abstract class AbstractBasicTableModel extends AbstractTableModel
 		this.title = title;
 	}
 
-	@Override
 	public final int getColumnCount() {
 		final Object[][] data = getData();
 		return (data == null) ? 0 : data.length;
@@ -55,29 +54,23 @@ public abstract class AbstractBasicTableModel extends AbstractTableModel
 
 	protected abstract Object[][] getData();
 
-	@Override
 	public final int getRowCount() {
 		final Object[][] data = getData();
 		return (data == null || data.length < 1) ? 0 : data[0].length;
 	}
 
-	@Override
 	public final Object getValueAt(final int rowIndex, final int columnIndex) {
 		return getData()[columnIndex][rowIndex];
 	}
 
-	@Override
 	public boolean ignoreColumnForExport(final int col) {
 		return false;
 	}
 
-
-	@Override
 	public boolean isEmphasized(final int row, final int col) {
 		return 0 != (row % 2);
 	}
 
-	@Override
 	public boolean isExportable() {
 		return true;
 	}

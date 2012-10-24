@@ -60,7 +60,6 @@ public class UnhandledException implements UncaughtExceptionHandler {
 			parent = p;
 		}
 
-		@Override
 		public void run() {
 			try {
 				final StringWriter writer = new StringWriter();
@@ -130,7 +129,6 @@ public class UnhandledException implements UncaughtExceptionHandler {
 		parent = parentComponent;
 	}
 
-	@Override
 	public synchronized void uncaughtException(final Thread t, final Throwable e) {
 		uncaughtException(e, parent);
 	}

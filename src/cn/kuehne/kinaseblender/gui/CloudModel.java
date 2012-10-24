@@ -39,7 +39,6 @@ public class CloudModel extends AbstractTableModel implements
 		this.cloud = cloud;
 	}
 
-	@Override
 	public int getColumnCount() {
 		return cloud.getSourceCount() + 1;
 	}
@@ -52,12 +51,10 @@ public class CloudModel extends AbstractTableModel implements
 		return "Source_" + column;
 	}
 
-	@Override
 	public int getRowCount() {
 		return cloud.getProductCount() + 1;
 	}
 
-	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		if (rowIndex == 0) {
 			if (columnIndex == 0) {
@@ -73,17 +70,14 @@ public class CloudModel extends AbstractTableModel implements
 		}
 	}
 
-	@Override
 	public boolean ignoreColumnForExport(final int col) {
 		return false;
 	}
 
-	@Override
 	public boolean isEmphasized(final int row, final int col) {
 		return 0 != (row % 2);
 	}
 
-	@Override
 	public boolean isExportable() {
 		return true;
 	}

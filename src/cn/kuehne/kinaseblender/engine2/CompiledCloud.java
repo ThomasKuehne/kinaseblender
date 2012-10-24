@@ -52,7 +52,6 @@ public class CompiledCloud {
 			prods = master.prods.clone();
 		}
 
-		@Override
 		public int compareTo(final SearchComb other) {
 			if (other == null) {
 				return -1;
@@ -77,7 +76,6 @@ public class CompiledCloud {
 		/**
 		 * number of products
 		 */
-		@Override
 		public int getScore() {
 			return score;
 		}

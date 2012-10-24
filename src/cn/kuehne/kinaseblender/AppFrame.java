@@ -74,7 +74,6 @@ public class AppFrame extends JFrame implements AppInterface {
 			this.item = item;
 		}
 
-		@Override
 		public void run() {
 			final ComboBoxModel model = combo.getModel();
 			if (model instanceof DefaultComboBoxModel) {
@@ -106,7 +105,6 @@ public class AppFrame extends JFrame implements AppInterface {
 			this.enable = enable;
 		}
 
-		@Override
 		public void run() {
 			exportButton.setEnabled(enable);
 		}
@@ -117,13 +115,11 @@ public class AppFrame extends JFrame implements AppInterface {
 	 * Export current table to clip board
 	 */
 	class ExportListener implements ActionListener, Runnable {
-		@Override
 		public void actionPerformed(final ActionEvent event) {
 			progressPush("write clipboard");
 			new Thread(this).start();
 		}
 
-		@Override
 		public void run() {
 			final ExportableTableModel tableModel = guiCloud.getTableModel();
 
@@ -169,7 +165,6 @@ public class AppFrame extends JFrame implements AppInterface {
 			this.fileNames = fileNames.clone();
 		}
 		
-		@Override
 		public void run() {
 			try {
 				progressPush("File importer");
@@ -207,7 +202,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	 * Use clip board as data source
 	 */
 	class Importer implements ActionListener, Runnable {
-		@Override
 		public void actionPerformed(final ActionEvent event) {
 			importClipboard();
 		}
@@ -216,7 +210,6 @@ public class AppFrame extends JFrame implements AppInterface {
 			new Thread(this).start();
 		}
 
-		@Override
 		public void run() {
 			try {
 				progressPush("read clipboard");
@@ -247,7 +240,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	 * Remove the latest progress report
 	 */
 	class ProgressPop implements Runnable {
-		@Override
 		public void run() {
 			synchronized (progressBar) {
 				String old = progressMessages.peek();
@@ -280,7 +272,6 @@ public class AppFrame extends JFrame implements AppInterface {
 			this.message = message;
 		}
 
-		@Override
 		public void run() {
 			synchronized (progressBar) {
 				if (DEBUG_PROGRESS) {
@@ -309,7 +300,6 @@ public class AppFrame extends JFrame implements AppInterface {
 			this.message = message;
 		}
 
-		@Override
 		public void run() {
 			progressMessages.pop();
 			progressMessages.push(message);
@@ -325,7 +315,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	 * Remove all entries from tab selector
 	 */
 	class RemoveAllItems implements Runnable {
-		@Override
 		public void run() {
 			combo.removeAllItems();
 			combo.setEnabled(false);
@@ -343,7 +332,6 @@ public class AppFrame extends JFrame implements AppInterface {
 			item = o;
 		}
 
-		@Override
 		public void run() {
 			combo.setSelectedItem(item);
 		}
@@ -360,7 +348,6 @@ public class AppFrame extends JFrame implements AppInterface {
 			this.args = args;
 		}
 
-		@Override
 		public void run() {
 			final AppFrame appFrame = new AppFrame();
 			
@@ -503,7 +490,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	/**
 	 * add an item to the tab selector 
 	 */
-	@Override
 	public void addItem(final Object item) {
 		invokeInEventDispatchThread(new AddItem(item));
 	}
@@ -511,7 +497,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	/**
 	 * add an ItemListener to the tab selector 
 	 */
-	@Override
 	public void addItemListener(ItemListener l) {
 		combo.addItemListener(l);
 	}
@@ -519,7 +504,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	/**
 	 * enable/disable export button 
 	 */
-	@Override
 	public void enableExport(final boolean enable) {
 		invokeInEventDispatchThread(new EnableExport(enable));
 	}
@@ -527,7 +511,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	/**
 	 * Execute a Runnable in the event thread 
 	 */
-	@Override
 	public void invokeInEventDispatchThread(Runnable runnable) {
 		if (SwingUtilities.isEventDispatchThread()) {
 			runnable.run();
@@ -566,7 +549,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	/**
 	 * remove last progress report
 	 */
-	@Override
 	public void progressPop() {
 		invokeInEventDispatchThread(new ProgressPop());
 	}
@@ -574,7 +556,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	/**
 	 * add a new progress report
 	 */
-	@Override
 	public void progressPush(final String message) {
 		invokeInEventDispatchThread(new ProgressPush(message));
 	}
@@ -582,7 +563,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	/**
 	 * replace current progress report
 	 */
-	@Override
 	public void progressSwitch(String message) {
 		invokeInEventDispatchThread(new ProgressSwitch(message));
 	}
@@ -590,7 +570,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	/**
 	 * remove all items from the tab selector
 	 */
-	@Override
 	public void removeAllItems() {
 		invokeInEventDispatchThread(new RemoveAllItems());
 	}
@@ -598,7 +577,6 @@ public class AppFrame extends JFrame implements AppInterface {
 	/**
 	 * select an item from the tab selector
 	 */
-	@Override
 	public void setSelectedItem(final Object item) {
 		invokeInEventDispatchThread(new SetSelectedItem(item));
 	}

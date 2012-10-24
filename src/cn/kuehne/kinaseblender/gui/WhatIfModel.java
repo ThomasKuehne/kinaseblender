@@ -67,14 +67,12 @@ public class WhatIfModel implements ExportableTableModel {
 		creator = new Creator(appInterface);
 	}
 
-	@Override
 	public void addTableModelListener(TableModelListener l) {
 		if (l != null) {
 			listeners.add(l);
 		}
 	}
 
-	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
 		case 0:
@@ -88,12 +86,10 @@ public class WhatIfModel implements ExportableTableModel {
 		}
 	}
 
-	@Override
 	public int getColumnCount() {
 		return 3;
 	}
 
-	@Override
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
 		case 0:
@@ -107,12 +103,10 @@ public class WhatIfModel implements ExportableTableModel {
 		}
 	}
 
-	@Override
 	public int getRowCount() {
 		return include.length;
 	}
 
-	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		switch (columnIndex) {
 		case 0:
@@ -127,27 +121,22 @@ public class WhatIfModel implements ExportableTableModel {
 		}
 	}
 
-	@Override
 	public boolean ignoreColumnForExport(final int col) {
 		return col == 0;
 	}
 
-	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return columnIndex == 2;
 	}
 
-	@Override
 	public boolean isEmphasized(final int row, final int col) {
 		return 0 != (row % 2);
 	}
 
-	@Override
 	public boolean isExportable() {
 		return true;
 	}
 
-	@Override
 	public void removeTableModelListener(TableModelListener l) {
 		int i = listeners.indexOf(l);
 		if (-1 < i) {
@@ -169,7 +158,6 @@ public class WhatIfModel implements ExportableTableModel {
 		}
 	}
 
-	@Override
 	public void setValueAt(Object rawValue, int rowIndex, int columnIndex) {
 		if (!isCellEditable(rowIndex, columnIndex)) {
 			throw new IllegalArgumentException("Cell isn't editable: row="
