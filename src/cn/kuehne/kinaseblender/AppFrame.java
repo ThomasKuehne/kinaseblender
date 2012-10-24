@@ -76,11 +76,11 @@ public class AppFrame extends JFrame implements AppInterface {
 
 		@Override
 		public void run() {
-			final ComboBoxModel<Object> model = combo.getModel();
+			final ComboBoxModel model = combo.getModel();
 			if (model instanceof DefaultComboBoxModel) {
 				final String key = item.toString();
 
-				final MutableComboBoxModel<Object> mutableModel = (MutableComboBoxModel<Object>) model;
+				final MutableComboBoxModel mutableModel = (MutableComboBoxModel) model;
 				for (int i = 0; i < mutableModel.getSize(); i++) {
 					final Object value = mutableModel.getElementAt(i);
 					final String valueKey = value.toString();
@@ -434,7 +434,7 @@ public class AppFrame extends JFrame implements AppInterface {
 		SwingUtilities.invokeLater(new Starter(args));
 	}
 
-	private final JComboBox<Object> combo;
+	private final JComboBox combo;
 
 	private final JButton exportButton;
 
@@ -478,9 +478,9 @@ public class AppFrame extends JFrame implements AppInterface {
 		ctr.add(exportButton, BorderLayout.CENTER);
 		top.add(ctr, BorderLayout.EAST);
 
-		combo = new JComboBox<Object>();
+		combo = new JComboBox();
 		combo.setEnabled(false);
-		combo.setModel(new DefaultComboBoxModel<Object>());
+		combo.setModel(new DefaultComboBoxModel());
 		top.add(combo, BorderLayout.CENTER);
 
 		guiCloud = new GuiCloud(this);
