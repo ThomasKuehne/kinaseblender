@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Thomas Kuehne <thomas@kuehne.cn>
+ * Copyright (c) 2012, 2015 Thomas Kuehne <thomas@kuehne.cn>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -77,13 +77,12 @@ class TransferBuffer<T extends Scored> {
 			data.add(comb);
 		}
 		if (maxSize < data.size()) {
-			T old = data.get(0);
+			/*T old = data.get(0);
 			if (data.getLast().getScore() == old.getScore()) {
 				throw new IllegalStateException("last.score == first.score "
 						+ score + " " + data.size() + " "
 						+ added);
-
-			}
+			} */
 			data.remove(0);
 		}
 
